@@ -1,0 +1,211 @@
+BUBBLE SORT
+#include <stdio.h>
+
+int main()
+{
+    int a[5], i, j, temp;
+
+    printf("Enter 5 elements: ");
+    for(i = 0; i < 5; i++)
+        scanf("%d", &a[i]);
+
+    for(i = 0; i < 4; i++)
+    {
+        for(j = 0; j < 4-i; j++)
+        {
+            if(a[j] > a[j+1])
+            {
+                temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+            }
+        }
+    }
+
+    printf("Sorted array: ");
+    for(i = 0; i < 5; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
+
+B.] SELECTION SORT
+#include <stdio.h>
+
+int main()
+{
+    int a[5], i, j, min, temp;
+
+    printf("Enter 5 elements: ");
+    for(i = 0; i < 5; i++)
+        scanf("%d", &a[i]);
+
+    for(i = 0; i < 4; i++)
+    {
+        min = i;
+
+        for(j = i+1; j < 5; j++)
+        {
+            if(a[j] < a[min])
+                min = j;
+        }
+
+        temp = a[i];
+        a[i] = a[min];
+        a[min] = temp;
+    }
+
+    printf("Sorted array: ");
+    for(i = 0; i < 5; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
+
+C.] INSERTION SORT:-
+#include <stdio.h>
+
+int main()
+{
+    int a[5], i, j, key;
+
+    printf("Enter 5 elements: ");
+    for(i = 0; i < 5; i++)
+        scanf("%d", &a[i]);
+
+    for(i = 1; i < 5; i++)
+    {
+        key = a[i];
+        j = i - 1;
+
+        while(j >= 0 && a[j] > key)
+        {
+            a[j+1] = a[j];
+            j--;
+        }
+
+        a[j+1] = key;
+    }
+
+    printf("Sorted array: ");
+    for(i = 0; i < 5; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
+
+D.]QUICK SORT:-
+#include <stdio.h>
+
+void quickSort(int a[], int low, int high)
+{
+    int i, j, pivot, temp;
+
+    if(low < high)
+    {
+        pivot = a[low];
+        i = low;
+        j = high;
+
+        while(i < j)
+        {
+            while(a[i] <= pivot && i < high)
+                i++;
+
+            while(a[j] > pivot)
+                j--;
+
+            if(i < j)
+            {
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+
+        a[low] = a[j];
+        a[j] = pivot;
+
+        quickSort(a, low, j-1);
+        quickSort(a, j+1, high);
+    }
+}
+
+int main()
+{
+    int a[5], i;
+
+    printf("Enter 5 elements: ");
+    for(i = 0; i < 5; i++)
+        scanf("%d", &a[i]);
+
+    quickSort(a, 0, 4);
+
+    printf("Sorted array: ");
+    for(i = 0; i < 5; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
+
+E.] MERGE SORT:-
+#include <stdio.h>
+
+void merge(int a[], int low, int mid, int high)
+{
+    int b[5], i = low, j = mid+1, k = 0;
+
+    while(i <= mid && j <= high)
+    {
+        if(a[i] < a[j])
+            b[k++] = a[i++];
+        else
+            b[k++] = a[j++];
+    }
+
+    while(i <= mid)
+        b[k++] = a[i++];
+
+    while(j <= high)
+        b[k++] = a[j++];
+
+    for(i = low, k = 0; i <= high; i++, k++)
+        a[i] = b[k];
+}
+
+void mergeSort(int a[], int low, int high)
+{
+    int mid;
+
+    if(low < high)
+    {
+        mid = (low + high) / 2;
+
+        mergeSort(a, low, mid);
+        mergeSort(a, mid+1, high);
+
+        merge(a, low, mid, high);
+    }
+}
+
+int main()
+{
+    int a[5], i;
+
+    printf("Enter 5 elements: ");
+    for(i = 0; i < 5; i++)
+        scanf("%d", &a[i]);
+
+    mergeSort(a, 0, 4);
+
+    printf("Sorted array: ");
+    for(i = 0; i < 5; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
