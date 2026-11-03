@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+#define SIZE 5
+
+int stack[SIZE];
+int top = -1;
+
+// Send Data (Push)
+void sendData(int data)
+{
+    if(top == SIZE - 1)
+    {
+        printf("Stack is Full!\n");
+    }
+    else
+    {
+        top++;
+        stack[top] = data;
+
+        printf("Data Sent: %d\n", data);
+    }
+}
+
+// Receive Data (Pop)
+void receiveData()
+{
+    if(top == -1)
+    {
+        printf("No Data Available!\n");
+    }
+    else
+    {
+        printf("Data Received: %d\n", stack[top]);
+        top--;
+    }
+}
+
+int main()
+{
+    int choice, data;
+
+    while(1)
+    {
+        printf("\n1. Send Data");
+        printf("\n2. Receive Data");
+        printf("\n3. Exit");
+
+        printf("\nEnter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                printf("Enter data: ");
+                scanf("%d", &data);
+                sendData(data);
+                break;
+
+            case 2:
+                receiveData();
+                break;
+
+            case 3:
+                return 0;
+
+            default:
+                printf("Invalid Choice!\n");
+        }
+    }
+
+    return 0;
+}
